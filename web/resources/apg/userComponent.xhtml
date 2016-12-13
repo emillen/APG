@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="name"></cc:attribute>
+        <cc:attribute name="link"></cc:attribute>
+        <cc:attribute name="amountOfItemsInCart"></cc:attribute>
+        <cc:attribute name="blocked"></cc:attribute>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation rendered="#{not cc.attrs.blocked}">
+        <div class="list-group">
+            <div class="list-group-item">
+                <h3 class="list-group-item-heading"> #{cc.attrs.name}  <span class="small">( #{cc.attrs.amountOfItemsInCart} )</span></h3>
+                <p class="list-group-item-text"><a  href="#{cc.attrs.link}">(block)</a></p>
+            </div>
+        </div>
+
+    </cc:implementation>
+</html>

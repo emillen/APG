@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <f:metadata>
+            <f:viewParam id="id" name="id" value="#{itemView.id}" required="true">
+            </f:viewParam>
+        </f:metadata>
+        <h:message for="id" />
+
+        <ui:composition template="./template/layout.xhtml">
+
+            <ui:define name="title">
+                Item
+            </ui:define>
+
+            <ui:define name="content">
+
+                <h2>
+                    #{itemView.item.name}
+                </h2>
+                <p>
+                    #{itemView.item.description}
+                </p>
+                <p>
+                    #{itemView.item.price} dollars (<span class="small"> #{itemView.item.amount} in stock ) </span> 
+                </p>
+
+
+                <h:form class="smaller">
+                    <div class="form-group">
+                        <h:outputLabel for="amount" value="amount "></h:outputLabel>
+                        <h:inputText  class="form-control" id="amount" value="#{itemView.amount}" />
+                    </div>
+                    <h:commandButton value="add to cart" action="#{itemView.addToCart()}" class="btn btn-default"></h:commandButton>
+                    <c:if test="#{userManager.admin}">
+                        <h:commandButton value="add to stock" action="#{itemView.addToStock()}" class="btn btn-default"></h:commandButton>
+                        <h:commandButton value="remove item" action="#{itemView.removeItem()}" class="btn btn-default"></h:commandButton>
+                    </c:if>
+                </h:form>
+                <p style="margin-top:15px;"></p>
+                <c:if test="#{itemView.fail}">
+                    <div class="alert alert-danger" role="alert">Not enough of these</div>
+                </c:if>
+                <c:if test="#{itemView.success}">
+                    <div class="alert alert-success" role="alert">You just added these to cart</div>
+                </c:if>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

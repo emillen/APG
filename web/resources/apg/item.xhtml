@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:apg="http://xmlns.jcp.org/jsf/composite/apg">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="link"/>
+        <cc:attribute name="title"/>
+        <cc:attribute name="description"/>
+        <cc:attribute name="price"/>
+        <cc:attribute name="amount"/>
+        <cc:attribute name="id"/>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <div class="list-group">
+            <a href="#{cc.attrs.link}" class="list-group-item">
+                <h3 class="list-group-item-heading"> 
+                    #{cc.attrs.title} 
+                    <span class="small"> #{cc.attrs.price} dollars</span> 
+                    <span class="small"> (#{cc.attrs.amount} in stock)</span>
+                </h3>
+                <p class="list-group-item-text">#{cc.attrs.description}</p>
+            </a>
+        </div>
+    </cc:implementation>
+</html>

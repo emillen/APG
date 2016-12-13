@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+        <cc:attribute name="username"></cc:attribute>
+        <cc:attribute name="password"></cc:attribute>
+        <cc:attribute name="action" method-signature="java.lang.String action()"></cc:attribute>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <h:form class="smaller">
+            <div class="form-group">
+                <h:outputLabel for="username" value="Username: "></h:outputLabel>
+                <h:inputText  class="form-control" id="username" value="#{cc.attrs.username}" />
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="pwd" value="Password:"></h:outputLabel>
+                <h:inputSecret class="form-control" id="pwd" value="#{cc.attrs.password}" ></h:inputSecret>
+            </div>
+            <h:commandButton value="submit" action="#{cc.attrs.action}" class="btn btn-default"></h:commandButton>
+        </h:form>
+    </cc:implementation>
+</html>

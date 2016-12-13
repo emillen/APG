@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:apg="http://xmlns.jcp.org/jsf/composite/apg"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+
+        <ui:composition template="./template/layout.xhtml">
+
+            <ui:define name="title">
+                Register
+            </ui:define>
+
+            <ui:define name="content">                
+                <h2>
+                    <h:outputText value="Register!"></h:outputText>
+                </h2>
+                <apg:userFormComponent
+                    username="#{loginView.username}"
+                    password="#{loginView.password}"
+                    action="#{loginView.register}"/>
+                <p style="margin-top:15px;"></p>
+                <c:if test="#{loginView.success()}">
+                    <div class="alert alert-success" role="alert">Account created</div>
+                </c:if>
+                <c:if test="#{not empty loginView.errormsg}">
+                    <div class="alert alert-danger" role="alert">#{loginView.errormsg}</div>
+                </c:if>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

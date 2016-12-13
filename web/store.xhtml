@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:apg="http://xmlns.jcp.org/jsf/composite/apg"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./template/layout.xhtml">
+
+            <ui:define name="title">
+                Store
+            </ui:define>
+
+            <ui:define name="content">
+
+                <c:forEach var="item" varStatus="status" items="#{storeView.items}">
+                    <apg:item 
+                        link="item.xhtml?id=#{item.id}" 
+                        title="#{item.name}" 
+                        description="#{item.description}" 
+                        price="#{item.price}" 
+                        amount="#{item.amount}"
+                        />
+                </c:forEach>
+
+                <c:if test="#{userManager.admin}">
+                    <h2>Add new item, mr admin!</h2>
+                    <h:form class="smaller">
+                        <div class="form-group">
+                            <h:outputLabel for="name" value="Item name: "></h:outputLabel>
+                            <h:inputText class="form-control" id="name" value="#{adminManager.itemname}"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="description" value="Description: "></h:outputLabel>
+                            <h:inputTextarea class="form-control" id="description" value="#{adminManager.description}"/>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="price" value="Price: "></h:outputLabel>
+                            <h:inputText class="form-control" id="price" value="#{adminManager.price}" />
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel for="amount" value="Amount: "></h:outputLabel>
+                            <h:inputText class="form-control" id="amount" value="#{adminManager.amount}"/>
+                        </div>
+                        <h:commandButton  class="btn btn-default" value="Add: " action="#{adminManager.addToInventory()}"></h:commandButton>
+                    </h:form>
+
+                </c:if>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

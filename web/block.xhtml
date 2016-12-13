@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:apg="http://xmlns.jcp.org/jsf/composite/apg"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <f:metadata>
+            <f:viewParam id="id" name="id" value="#{blockView.id}" required="false">
+            </f:viewParam>
+        </f:metadata>
+        <h:message for="id" />
+
+
+
+        <ui:composition template="./template/layout.xhtml">
+
+            <ui:define name="title">
+                Block users
+                <c:if test="#{blockView.block()}"></c:if>
+            </ui:define>
+
+
+            <ui:define name="content">
+
+                <c:forEach var="user" varStatus="status" items="#{blockView.userList}">
+
+                    <apg:userComponent rendered="#{not user.isBanned()}"
+                                       name="#{user.username}"
+                                       amountOfItemsInCart="#{user.shoppingCart.size()}"
+                                       blocked="#{user.isBanned()}"
+                                       link="block.xhtml?id=#{user.id}"
+                                       />
+
+                </c:forEach>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
